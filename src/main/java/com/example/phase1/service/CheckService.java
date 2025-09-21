@@ -2,7 +2,7 @@ package com.example.phase1.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.phase1.model.CheckResponse;
+import com.example.phase1.dto.CheckResponse;
 
 @Service
 public class CheckService {

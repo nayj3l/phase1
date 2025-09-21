@@ -1,4 +1,4 @@
-package com.example.phase1.model;
+package com.example.phase1.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

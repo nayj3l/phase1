@@ -6,16 +6,18 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.phase1.dto.CheckRequest;
+import com.example.phase1.dto.CheckResponse;
 import com.example.phase1.model.CheckRecord;
-import com.example.phase1.model.CheckResponse;
 import com.example.phase1.repo.CheckRecordRepository;
 import com.example.phase1.service.CheckService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -28,10 +30,8 @@ public class CheckController {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @PostMapping("/check")
-    public ResponseEntity<CheckResponse> check(@RequestParam("value") Integer value) {
-        if (value == null) {
-            return ResponseEntity.badRequest().body(null);
-        }
+    public ResponseEntity<CheckResponse> check(@Valid @RequestBody CheckRequest request) {
+        Integer value = request.getValue();
 
         CheckResponse resp = checkService.checkForC2(value);
         CheckResponse responseToReturn = resp != null ? resp : 
